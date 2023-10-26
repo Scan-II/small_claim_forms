@@ -1,0 +1,100 @@
+{
+  "buttons": {
+    "next": "Weiter",
+    "back": "Zurück",
+    "add": "Hinzufügen",
+    "cancel": "Abbrechen",
+    "downloadJSON": "JSON herunterladen",
+    "downloadPDF": "PDF herunterladen",
+    "submit": "Einreichen",
+    "preview": "Vorschau",
+    "close": "Schließen"
+  },
+  "errors": {
+    "required": "Felderforderlich"
+  },
+  "menu": {
+    "title": "Formblatt C - Antwortformblatt",
+    "home": "Home",
+    "takingLegalAction": "Klage vor Gericht",
+    "onlineForms": "Online-Formulare",
+    "smallClaimsForms": "Formulare „Geringfügige Forderungen“",
+    "formC": "Formblatt C - Antwortformblatt",
+    "completeVersion": "Wechseln zur vereinfachten Version",
+    "simplifiedVersion": "Wechseln zur Vollversion",
+    "formSteps": "Kompilierungsstufen",
+    "step1": "Leitlinien",
+    "step2": "Schritt 1",
+    "usefulPDFs": "Nützliche PDFs",
+    "noPDFs": "Es gibt keine nützlichen PDFs für den Abschnitt",
+    "synonyms": "Synonyme",
+    "noSynonyms": "Es gibt keine Synonyme für den Abschnitt",
+    "loadSaveDraftExplanation": "Sie können ein Formular während der Bearbeitung als Entwurf speichern und es später erneut laden, um es zu vervollständigen.",
+    "loadDraft": "Entwurf laden",
+    "saveDraft": "Entwurf herunterladen",
+    "warningToast": "Bitte beachten, dass Sie gerade die <strong>vereinfachte Version des Textes</strong> sehen",
+    "errorToast": "<strong>Kompilierungsfehler.</strong> Bitte überprüfen Sie den Abschnitt",
+    "originalText": "Originaltext",
+    "simplifiedText": "Vereinfachter Text",
+    "details": "Einzelheiten"
+  },
+  "footer": {
+    "reportAProblem": "Technische / inhaltliche Probleme melden oder Rückmeldungen zu dieser Seite geben",
+    "cookies": "Cookies",
+    "legalNotice": "Rechtlicher Hinweis",
+    "privacyPolicy": "Schutz der Privatsphäre",
+    "brexitNotice": "Brexit-Mitteilung",
+    "contact": "Kontakt",
+    "sitemap": "Wegweiser"
+  },
+  "stepOne": {
+    "title": "Wichtiger Hinweis und leitlinien für den Beklagten"
+  },
+  "stepTwo": {
+    "firstPartTitle": "Teil I (vom Gericht auszufüllen)",
+    "claimant": "Name des Antragsteller",
+    "defendant": "Name des Beklagten",
+    "court": "Gericht",
+    "claim": "Forderung",
+    "caseNumber": "Aktenzeichen",
+    "secondPartTitle": "Teil II (vom Beklagten auszufüllen)",
+    "claimApproval": "1. Erkennen Sie die Forderung an?",
+    "yes": "Ja",
+    "no": "Nein",
+    "partially": "Teilweise",
+    "noPartiallyAgreementReason": "Wenn Sie mit Nein oder teilweise mit Nein geantwortet haben, geben Sie bitte die Gründe dafür an:",
+    "outsideScope": "Die Klage fällt nicht in den Anwendungsbereich des europäischen Verfahrens für geringfügige Forderungen",
+    "specify": "Bitte genauer angeben",
+    "other": "Sonstige Gründe",
+    "justifyingEvidence": "2. Falls Sie die Forderung nicht anerkennen, beschreiben Sie bitte die Beweismittel, die Sie vorlegen möchten, um sie zu bestreiten. Geben Sie bitte an, welche Aspekte Ihrer Erwiderung die Beweismittel belegen. Fügen Sie bitte gegebenenfalls als Beweismittel geeignete Unterlagen bei.",
+    "writtenEvidence": "2.1. Urkundenbeweis",
+    "witnesses": "2.2. Zeugenbeweis",
+    "otherEvidence": "2.3. Sonstiges Beweismittel",
+    "oralHearing": "Mündliche Verhandlung: beachten Sie bitte, dass es sich bei dem europäischen Verfahren für geringfügige Forderungen um ein schriftliches Verfahren handelt. Sie können jedoch in diesem Formblatt oder zu einem späteren Zeitpunkt die Durchführung einer mündlichen Verhandlung beantragen. Das Gericht kann eine mündliche Verhandlung anordnen, wenn es diese zur Gewährleistung eines fairen Verfahrens für notwendig erachtet, oder sie unter Berücksichtigung aller Umstände der Rechtssache ablehnen.",
+    "oralHearingRequest": "3. Wünschen Sie eine mündliche Verhandlung?",
+    "reasons": "Wenn ja, führen Sie bitte die Gründe an",
+    "oralHearingPhysicallyPresence": "4. Falls das Gericht beschließt, eine mündliche Verhandlung anzuberaumen, wollen Sie persönlich teilnehmen?",
+    "proceedingsCostClaim": "5. Fordern Sie die Erstattung der Verfahrenskosten?",
+    "proceedingsCostClaimSpecification": "Wenn ja, machen Sie bitte präzise Angaben zur Art der Kosten und - wenn möglich - zur Höhe der Forderung bzw. der bisher entstandenen Kosten",
+    "counterclaim": "Widerklage: falls Sie eine Klage gegen den Kläger erheben möchten (Widerklage), so sollten Sie ein ausgefülltes Formblatt A beifügen. Bitte beachten Sie, dass Sie für die Zwecke der Widerklage als Kläger angesehen werden.",
+    "counterclaimRequest": "6. Wollen Sie eine Widerklage erheben?",
+    "counterclaimInfo": "Wenn ja, fügen Sie bitte ein ausgefülltes getrenntes <a href=\"{{ url }}\">Formblatt A</a> bei.",
+    "electronicJudgmentAgreement": "7.1. Stimmen Sie dem Einsatz elektronischer Mittel für die Zustellung des Urteils zu?",
+    "electronicCommunicationAgreement": "7.2 Stimmen Sie dem Einsatz elektronischer Mittel für die Übermittlung anderer schriftlicher Mitteilungen als des Urteils zu?",
+    "otherInformation": "8. Sonstige Angaben",
+    "dateAndSignature": "9. Datum und Unterschrift",
+    "truthfulnessDeclaration": "Ich erkläre, dass ich die vorstehenden Angaben nach meinem bestem Wissen und Gewissen gemacht habe.",
+    "doneAt": "Ort",
+    "date": "Datum",
+    "nameAndSignature": "Name und Unterschrift",
+    "rememberSignStampPrintedForm": "Bitte vergessen Sie nicht die Unterschrift und gegebenenfalls den Stempel, nachdem Sie das Formular ausgedruckt haben."
+  },
+  "preview": {
+    "title": "Vorschau"
+  },
+  "uploading": {
+    "title": "Hochladen",
+    "success": "<strong>Ein Formular für das Verfahren für „geringfügige Forderungen“</strong> wurde erfolgreich hochgeladen.",
+    "error": "Beim Laden des Formulars ist ein <strong>Fehler</strong> aufgetreten."
+  }
+}

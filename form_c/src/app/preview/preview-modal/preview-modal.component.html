@@ -1,0 +1,744 @@
+<div class="modal-header py-4">
+  <h2 class="modal-title ps-3" [translate]="'preview.title'">Preview</h2>
+  <a
+    class="close js-close-modal hide-text"
+    tabindex="1"
+    (click)="cancel()"
+    style="top: 2rem"
+    >Close</a
+  >
+</div>
+
+<div class="modal-body px-5" id="content">
+  <h3 class="pdf-primary-title" [translate]="'stepTwo.firstPartTitle'">
+    Part I (to be filled in by the court/tribunal)
+  </h3>
+
+  <div class="ps-3">
+    <h4 class="pdf-line-field">
+      <span class="colon pdf-label" [translate]="'stepTwo.claimant'"
+        >Name of claimant</span
+      >
+      <span class="fw-bold pdf-value">{{ stepTwo.firstPart.claimant }}</span>
+    </h4>
+
+    <h4 class="pdf-line-field">
+      <span class="colon pdf-label" [translate]="'stepTwo.defendant'"
+        >Name of defendant</span
+      >
+      <span class="fw-bold pdf-value">{{ stepTwo.firstPart.defendant }}</span>
+    </h4>
+
+    <h4 class="pdf-line-field">
+      <span class="colon pdf-label" [translate]="'stepTwo.court'"
+        >Court/tribunal</span
+      >
+      <span class="fw-bold pdf-value">{{ stepTwo.firstPart.court }}</span>
+    </h4>
+
+    <h4 class="pdf-line-field">
+      <span class="colon pdf-label" [translate]="'stepTwo.claim'">Claim</span>
+      <span class="fw-bold pdf-value">{{ stepTwo.firstPart.claim }}</span>
+    </h4>
+
+    <h4 class="pdf-line-field">
+      <span class="colon pdf-label" [translate]="'stepTwo.caseNumber'"
+        >Case number</span
+      >
+      <span class="fw-bold pdf-value">{{ stepTwo.firstPart.caseNumber }}</span>
+    </h4>
+  </div>
+
+  <h3 class="pdf-primary-title" [translate]="'stepTwo.secondPartTitle'">
+    Part II (to be filled in by the defendant)
+  </h3>
+
+  <div class="ps-3">
+    <h4 class="pdf-secondary-title" [translate]="'stepTwo.claimApproval'">
+      1. Do you accept the claim?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.claimApproval === 'yes'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.claimApproval === 'no'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.claimApproval === 'partial'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.partially'"
+              >Partially</span
+            >
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="ps-3"
+        *ngIf="
+          stepTwo.secondPart.claimApproval === 'no' ||
+          stepTwo.secondPart.claimApproval === 'partial'
+        "
+      >
+        <h4
+          class="pdf-secondary-title"
+          [translate]="'stepTwo.noPartiallyAgreementReason'"
+        >
+          If you have answered "no" or "partially", please indicate reasons:
+        </h4>
+        <div class="ps-3">
+          <h4 class="pdf-tertiary-title">
+            <span [translate]="'stepTwo.outsideScope'"
+              >The claim is outside the scope of the European Small Claims
+              Procedure</span
+            >
+          </h4>
+
+          <div class="ps-3">
+            <div class="pdf-radio-buttons">
+              <div class="radio-wrapper radio-margin-bottom">
+                <input
+                  type="radio"
+                  [checked]="
+                    stepTwo.secondPart.negativePartialApproval.outsideScope ===
+                    'yes'
+                  "
+                  class="disabled-input pdf-radio-button"
+                />
+                <label>
+                  <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+                </label>
+              </div>
+
+              <div class="radio-wrapper">
+                <input
+                  type="radio"
+                  [checked]="
+                    stepTwo.secondPart.negativePartialApproval.outsideScope ===
+                    'no'
+                  "
+                  class="disabled-input pdf-radio-button"
+                />
+                <label>
+                  <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+                </label>
+              </div>
+            </div>
+
+            <div
+              class="ps-3"
+              *ngIf="
+                stepTwo.secondPart.negativePartialApproval.outsideScope ===
+                'yes'
+              "
+            >
+              <div class="pdf-div-field">
+                <p class="margin-top">
+                  <span class="colon pdf-label" [translate]="'stepTwo.specify'"
+                    >Please specify
+                  </span>
+                </p>
+                <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+                  {{
+                    stepTwo.secondPart.negativePartialApproval.outsideScopeText
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="pdf-tertiary-title">
+            <span [translate]="'stepTwo.other'">Other</span>
+          </h4>
+
+          <div class="ps-3">
+            <div class="pdf-radio-buttons">
+              <div class="radio-wrapper radio-margin-bottom">
+                <input
+                  type="radio"
+                  [checked]="
+                    stepTwo.secondPart.negativePartialApproval.other === 'yes'
+                  "
+                  class="disabled-input pdf-radio-button"
+                />
+                <label>
+                  <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+                </label>
+              </div>
+
+              <div class="radio-wrapper">
+                <input
+                  type="radio"
+                  [checked]="
+                    stepTwo.secondPart.negativePartialApproval.other === 'no'
+                  "
+                  class="disabled-input pdf-radio-button"
+                />
+                <label>
+                  <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+                </label>
+              </div>
+            </div>
+
+            <div
+              class="ps-3"
+              *ngIf="stepTwo.secondPart.negativePartialApproval.other === 'yes'"
+            >
+              <div class="pdf-div-field">
+                <p class="margin-top">
+                  <span class="colon pdf-label" [translate]="'stepTwo.specify'"
+                    >Please specify
+                  </span>
+                </p>
+                <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+                  {{ stepTwo.secondPart.negativePartialApproval.otherText }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4
+            class="pdf-tertiary-title"
+            [translate]="'stepTwo.justifyingEvidence'"
+          >
+            2. If you do not accept the claim please describe the evidence you
+            wish to put forward to contest it. Please state which points of your
+            answer the evidence supports. Where appropriate, you should add
+            relevant supporting documents.
+          </h4>
+
+          <div class="ps-3">
+            <h5 class="pdf-tertiary-title">
+              <span [translate]="'stepTwo.writtenEvidence'"
+                >2.1. Written evidence</span
+              >
+            </h5>
+
+            <div class="ps-3">
+              <div class="pdf-radio-buttons">
+                <div class="radio-wrapper radio-margin-bottom">
+                  <input
+                    type="radio"
+                    [checked]="
+                      stepTwo.secondPart.negativePartialApproval
+                        .writtenEvidence === 'yes'
+                    "
+                    class="disabled-input pdf-radio-button"
+                  />
+                  <label>
+                    <span class="pdf-label" [translate]="'stepTwo.yes'"
+                      >Yes</span
+                    >
+                  </label>
+                </div>
+
+                <div class="radio-wrapper">
+                  <input
+                    type="radio"
+                    [checked]="
+                      stepTwo.secondPart.negativePartialApproval
+                        .writtenEvidence === 'no'
+                    "
+                    class="disabled-input pdf-radio-button"
+                  />
+                  <label>
+                    <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+                  </label>
+                </div>
+              </div>
+
+              <div
+                class="ps-3"
+                *ngIf="
+                  stepTwo.secondPart.negativePartialApproval.writtenEvidence ===
+                  'yes'
+                "
+              >
+                <div class="pdf-div-field">
+                  <p class="margin-top">
+                    <span
+                      class="colon pdf-label"
+                      [translate]="'stepTwo.specify'"
+                      >Please specify
+                    </span>
+                  </p>
+                  <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+                    {{
+                      stepTwo.secondPart.negativePartialApproval
+                        .writtenEvidenceText
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h5 class="pdf-tertiary-title">
+              <span [translate]="'stepTwo.witnesses'">2.2. Witnesses</span>
+            </h5>
+
+            <div class="ps-3">
+              <div class="pdf-radio-buttons">
+                <div class="radio-wrapper radio-margin-bottom">
+                  <input
+                    type="radio"
+                    [checked]="
+                      stepTwo.secondPart.negativePartialApproval.witnesses ===
+                      'yes'
+                    "
+                    class="disabled-input pdf-radio-button"
+                  />
+                  <label>
+                    <span class="pdf-label" [translate]="'stepTwo.yes'"
+                      >Yes</span
+                    >
+                  </label>
+                </div>
+
+                <div class="radio-wrapper">
+                  <input
+                    type="radio"
+                    [checked]="
+                      stepTwo.secondPart.negativePartialApproval.witnesses ===
+                      'no'
+                    "
+                    class="disabled-input pdf-radio-button"
+                  />
+                  <label>
+                    <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+                  </label>
+                </div>
+              </div>
+
+              <div
+                class="ps-3"
+                *ngIf="
+                  stepTwo.secondPart.negativePartialApproval.witnesses === 'yes'
+                "
+              >
+                <div class="pdf-div-field">
+                  <p class="margin-top">
+                    <span
+                      class="colon pdf-label"
+                      [translate]="'stepTwo.specify'"
+                      >Please specify
+                    </span>
+                  </p>
+                  <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+                    {{
+                      stepTwo.secondPart.negativePartialApproval.witnessesText
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h5 class="pdf-tertiary-title">
+              <span [translate]="'stepTwo.otherEvidence'">2.3. Other</span>
+            </h5>
+
+            <div class="ps-3">
+              <div class="pdf-radio-buttons">
+                <div class="radio-wrapper radio-margin-bottom">
+                  <input
+                    type="radio"
+                    [checked]="
+                      stepTwo.secondPart.negativePartialApproval
+                        .otherEvidence === 'yes'
+                    "
+                    class="disabled-input pdf-radio-button"
+                  />
+                  <label>
+                    <span class="pdf-label" [translate]="'stepTwo.yes'"
+                      >Yes</span
+                    >
+                  </label>
+                </div>
+
+                <div class="radio-wrapper">
+                  <input
+                    type="radio"
+                    [checked]="
+                      stepTwo.secondPart.negativePartialApproval
+                        .otherEvidence === 'no'
+                    "
+                    class="disabled-input pdf-radio-button"
+                  />
+                  <label>
+                    <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+                  </label>
+                </div>
+              </div>
+
+              <div
+                class="ps-3"
+                *ngIf="
+                  stepTwo.secondPart.negativePartialApproval.otherEvidence ===
+                  'yes'
+                "
+              >
+                <div class="pdf-div-field">
+                  <p class="margin-top">
+                    <span
+                      class="colon pdf-label"
+                      [translate]="'stepTwo.specify'"
+                      >Please specify
+                    </span>
+                  </p>
+                  <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+                    {{
+                      stepTwo.secondPart.negativePartialApproval
+                        .otherEvidenceText
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="pdf-secondary-title" [translate]="'stepTwo.oralHearingRequest'">
+      3. Do you want an oral hearing to be held?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.oralHearingRequest === 'yes'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.oralHearingRequest === 'no'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="ps-3" *ngIf="stepTwo.secondPart.oralHearingRequest === 'yes'">
+        <div class="pdf-div-field">
+          <p class="margin-top">
+            <span class="colon pdf-label" [translate]="'stepTwo.reasons'"
+              >If yes, please indicate reasons
+            </span>
+          </p>
+          <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+            {{ stepTwo.secondPart.oralHearingReasons }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4
+      class="pdf-secondary-title"
+      [translate]="'stepTwo.oralHearingPhysicallyPresence'"
+    >
+      4. If the court decides to hold an oral hearing, do you want to be
+      physically present?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="
+              stepTwo.secondPart.oralHearingPhysicallyPresence === 'yes'
+            "
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="
+              stepTwo.secondPart.oralHearingPhysicallyPresence === 'no'
+            "
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="ps-3"
+        *ngIf="stepTwo.secondPart.oralHearingPhysicallyPresence === 'yes'"
+      >
+        <div class="pdf-div-field">
+          <p class="margin-top">
+            <span class="colon pdf-label" [translate]="'stepTwo.reasons'"
+              >If yes, please indicate reasons
+            </span>
+          </p>
+          <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+            {{ stepTwo.secondPart.oralHearingPhysicallyPresenceReasons }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4
+      class="pdf-secondary-title"
+      [translate]="'stepTwo.proceedingsCostClaim'"
+    >
+      5. Are you claiming the costs of proceedings?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.proceedingsCostClaim === 'yes'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.proceedingsCostClaim === 'no'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+      </div>
+
+      <div
+        class="ps-3"
+        *ngIf="stepTwo.secondPart.proceedingsCostClaim === 'yes'"
+      >
+        <div class="pdf-div-field">
+          <p class="margin-top">
+            <span
+              class="colon pdf-label"
+              [translate]="'stepTwo.proceedingsCostClaimSpecification'"
+              >If yes, please specify which costs and if possible, indicate the
+              amount claimed or incurred so far
+            </span>
+          </p>
+          <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+            {{ stepTwo.secondPart.proceedingsCostClaimText }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="pdf-secondary-title" [translate]="'stepTwo.counterclaimRequest'">
+      6. Do you want to make a counterclaim?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.counterclaim === 'yes'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.counterclaim === 'no'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="ps-3" *ngIf="stepTwo.secondPart.counterclaim === 'yes'">
+        <p class="margin-top pdf-no-indentation">
+          <span
+            class="pdf-text"
+            [innerHTML]="'stepTwo.counterclaimInfo' | translate"
+          >
+            If yes, please fill in and attach a separate Form A</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <h4
+      class="pdf-secondary-title"
+      [translate]="'stepTwo.electronicJudgmentAgreement'"
+    >
+      7.1. Do you agree to the use of electronic means for service of the
+      judgment?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.electronicJudgmentAgreement === 'yes'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="stepTwo.secondPart.electronicJudgmentAgreement === 'no'"
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <h4
+      class="pdf-secondary-title"
+      [translate]="'stepTwo.electronicCommunicationAgreement'"
+    >
+      7.2 Do you agree to the use of electronic means to receive written
+      communications other than the judgment?
+    </h4>
+
+    <div class="ps-3">
+      <div class="pdf-radio-buttons">
+        <div class="radio-wrapper radio-margin-bottom">
+          <input
+            type="radio"
+            [checked]="
+              stepTwo.secondPart.electronicCommunicationAgreement === 'yes'
+            "
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.yes'">Yes</span>
+          </label>
+        </div>
+
+        <div class="radio-wrapper">
+          <input
+            type="radio"
+            [checked]="
+              stepTwo.secondPart.electronicCommunicationAgreement === 'no'
+            "
+            class="disabled-input pdf-radio-button"
+          />
+          <label>
+            <span class="pdf-label" [translate]="'stepTwo.no'">No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="pdf-secondary-title" [translate]="'stepTwo.otherInformation'">
+      8. Other information
+    </h4>
+
+    <div class="pdf-div-field">
+      <div class="fw-bold justify margin-bottom ps-3 pdf-value">
+        {{ stepTwo.secondPart.otherInformation }}
+      </div>
+    </div>
+
+    <h4 class="pdf-secondary-title" [translate]="'stepTwo.dateAndSignature'">
+      9. Date and signature
+    </h4>
+
+    <div class="ps-3">
+      <h5 class="pdf-line-field">
+        <span class="colon pdf-label" [translate]="'stepTwo.doneAt'"
+          >Done at</span
+        >
+        <span class="fw-bold pdf-value">{{ stepTwo.secondPart.doneAt }}</span>
+      </h5>
+
+      <h5 class="pdf-line-field">
+        <span class="colon pdf-label" [translate]="'stepTwo.date'">Date</span>
+        <span class="fw-bold pdf-value">{{ stepTwo.secondPart.date }}</span>
+      </h5>
+    </div>
+  </div>
+
+  <div class="modal-footer px-5 py-4 justify-content-evenly">
+    <button
+      class="button big outline my-3"
+      (click)="cancel()"
+      [translate]="'buttons.cancel'"
+    >
+      Cancel
+    </button>
+
+    <button
+      class="button big dark my-3"
+      (click)="navbarService.generateJson()"
+      [translate]="'buttons.downloadJSON'"
+    >
+      Download JSON
+    </button>
+
+    <button
+      class="button big dark my-3"
+      [translate]="'buttons.downloadPDF'"
+      (click)="downloadPdf()"
+    >
+      Download PDF
+    </button>
+
+    <button class="button big dark my-3" [translate]="'buttons.submit'">
+      Submit
+    </button>
+  </div>
+
+  <app-spinner [showSpinner]="showSpinner"></app-spinner>
+</div>

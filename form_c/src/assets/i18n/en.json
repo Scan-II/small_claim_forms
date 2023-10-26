@@ -1,0 +1,100 @@
+{
+  "buttons": {
+    "next": "Next",
+    "back": "Back",
+    "add": "Add",
+    "cancel": "Cancel",
+    "downloadJSON": "Download JSON",
+    "downloadPDF": "Download PDF",
+    "submit": "Submit",
+    "preview": "Preview",
+    "close": "Close"
+  },
+  "errors": {
+    "required": "Field required"
+  },
+  "menu": {
+    "title": "Form C - Answer form",
+    "home": "Home",
+    "takingLegalAction": "Taking legal action",
+    "onlineForms": "Online forms",
+    "smallClaimsForms": "Small claims forms",
+    "formC": "Form C - Answer form",
+    "completeVersion": "Switch to simplified version",
+    "simplifiedVersion": "Switch to complete version",
+    "formSteps": "Form steps",
+    "step1": "Guidelines",
+    "step2": "Step 1",
+    "usefulPDFs": "Useful PDFs",
+    "noPDFs": "There are no useful PDFs for this step",
+    "synonyms": "Synonyms",
+    "noSynonyms": "There are no synonyms for this step",
+    "loadSaveDraftExplanation": "You can save a form you are working on as a draft. Load a saved form later to complete it.",
+    "loadDraft": "Load draft",
+    "saveDraft": "Download draft",
+    "warningToast": "<strong>Careful</strong>, remember that you are viewing <strong>simplified information</strong>",
+    "errorToast": "<strong>Compilation error.</strong> Please review the section",
+    "originalText": "Original text",
+    "simplifiedText": "Simplified text",
+    "details": "Details"
+  },
+  "footer": {
+    "reportAProblem": "Report a technical / content problem or give feedback on this page",
+    "cookies": "Cookies",
+    "legalNotice": "Legal notice",
+    "privacyPolicy": "Privacy policy",
+    "brexitNotice": "Brexit notice",
+    "contact": "Contact",
+    "sitemap": "Sitemap"
+  },
+  "stepOne": {
+    "title": "Important information and guidelines for the defendant"
+  },
+  "stepTwo": {
+    "firstPartTitle": "Part I (to be filled in by the court/tribunal)",
+    "claimant": "Name of claimant",
+    "defendant": "Name of defendant",
+    "court": "Court/tribunal",
+    "claim": "Claim",
+    "caseNumber": "Case number",
+    "secondPartTitle": "Part II (to be filled in by the defendant)",
+    "claimApproval": "1. Do you accept the claim?",
+    "yes": "Yes",
+    "no": "No",
+    "partially": "Partially",
+    "noPartiallyAgreementReason": "If you have answered \"no\" or \"partially\", please indicate reasons:",
+    "outsideScope": "The claim is outside the scope of the European Small Claims Procedure",
+    "specify": "Please specify",
+    "other": "Other",
+    "justifyingEvidence": "2. If you do not accept the claim please describe the evidence you wish to put forward to contest it. Please state which points of your answer the evidence supports. Where appropriate, you should add relevant supporting documents.",
+    "writtenEvidence": "2.1. Written evidence",
+    "witnesses": "2.2. Witnesses",
+    "otherEvidence": "2.3. Other",
+    "oralHearing": "Oral hearing: please note that the European Small Claims Procedure is a written procedure. However, you can ask for an oral hearing to be held. Please be aware that having regard to the circumstances of the case, the court/tribunal can refuse this request.",
+    "oralHearingRequest": "3. Do you want an oral hearing to be held?",
+    "reasons": "If yes, please indicate reasons",
+    "oralHearingPhysicallyPresence": "4. If the court decides to hold an oral hearing, do you want to be physically present?",
+    "proceedingsCostClaim": "5. Are you claiming the costs of proceedings?",
+    "proceedingsCostClaimSpecification": "If yes, please specify which costs and if possible, indicate the amount claimed or incurred so far",
+    "counterclaim": "Counterclaim: if you want to make a claim against the claimant (counterclaim), you should fill in and attach a separate Form A. Please note that for the purposes of the counterclaim you are considered to be the claimant.",
+    "counterclaimRequest": "6. Do you want to make a counterclaim?",
+    "counterclaimInfo": "If yes, please fill in and attach a separate <a href=\"{{ url }}\">Form A</a>",
+    "electronicJudgmentAgreement": "7.1. Do you agree to the use of electronic means for service of the judgment?",
+    "electronicCommunicationAgreement": "7.2 Do you agree to the use of electronic means to receive written communications other than the judgment?",
+    "otherInformation": "8. Other information",
+    "dateAndSignature": "9. Date and signature",
+    "truthfulnessDeclaration": "I declare that the information provided is true to the best of my knowledge and is given in good faith.",
+    "doneAt": "Done at",
+    "date": "Date",
+    "nameAndSignature": "Name and signature",
+    "rememberSignStampPrintedForm": "Please remember to sign and stamp (if available) this form once it has been printed."
+  },
+  "preview": {
+    "title": "Preview"
+  },
+  "uploading": {
+    "title": "Loading result",
+    "success": "You have successfully loaded a form concerning procedure <strong>Small claims forms</strong>.",
+    "error": "An <strong>error</strong> occurred while loading the form."
+  }
+}
