@@ -39,7 +39,7 @@ To use one of the four SPAs available on your local system, you need to follow t
 
 In the case you would like to use the second version, you need to follow these steps after having completed the previous ones:
 
-1. open a new terminal and run the command `python -m http.server 3000` or `python3 -m http.server 3500` (depending on the operating system and the version of Python in use);
+1. open a new terminal and run the command `python -m http.server 3500` or `python3 -m http.server 3500` (depending on the operating system and the version of Python in use);
 
 2. open the browser and navigate to:
 
