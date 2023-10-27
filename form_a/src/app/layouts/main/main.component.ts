@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from "@angular/core";
-import { SCRIPT_PATH } from "src/app/app.constants";
+import { EXTERNAL_URI, SCRIPT_PATH } from "src/app/app.constants";
 import { ScriptService } from "src/app/shared/services/script.service";
 import { TranslateConfigService } from "src/app/shared/services/translate-config.service";
 
@@ -15,24 +15,20 @@ export class MainComponent implements OnInit {
     private scriptService: ScriptService
   ) {
     this.translateConfigService.setDefaultLanguage();
+    if (window.addEventListener) {
+      window.addEventListener("message", this.listener.bind(this), false);
+    }
   }
 
   ngOnInit() {
     this.scriptService.loadScript(this.renderer, SCRIPT_PATH);
-
-    if (window.addEventListener) {
-      window.addEventListener(
-        "storage",
-        this.storageListener.bind(this),
-        false
-      );
-    }
   }
 
-  private storageListener() {
-    const lang = localStorage.getItem("lang");
-    if (lang || typeof lang === "string")
-      this.translateConfigService.setLanguage(lang);
-    else this.translateConfigService.setDefaultLanguage();
+  private listener(event: MessageEvent) {
+    if (event.origin === EXTERNAL_URI) {
+      if (event.data && typeof event.data === "string") {
+        this.translateConfigService.setLanguage(event.data);
+      }
+    }
   }
 }

@@ -5,21 +5,18 @@ import { TranslateService } from "@ngx-translate/core";
   providedIn: "root",
 })
 export class TranslateConfigService {
-  currentLang: any;
-
-  constructor(private translate: TranslateService) {
-    this.currentLang = localStorage.getItem("lang");
-  }
+  constructor(private translate: TranslateService) {}
 
   setDefaultLanguage() {
-    if (!this.currentLang || typeof this.currentLang !== "string") {
-      this.currentLang = "en";
-      localStorage.setItem("lang", this.currentLang);
+    let currentLang = this.getCurrentLang();
+
+    if (!currentLang || typeof currentLang !== "string") {
+      currentLang = "en";
+      localStorage.setItem("lang", currentLang);
     }
-    
-    this.translate.setDefaultLang(this.currentLang);
-    this.translate.use(this.currentLang);
-    return this.currentLang;
+
+    this.translate.setDefaultLang(currentLang);
+    this.translate.use(currentLang);
   }
 
   setLanguage(setLang: string) {

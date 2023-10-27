@@ -1,5 +1,6 @@
 JSON_PATH = `${getBaseHref()}assets/json/`;
 I18N_PATH = `${getBaseHref()}assets/i18n/`;
+EXTERNAL_URI = "http://localhost:3500";
 
 let version = "original";
 let currentLang;
@@ -11,7 +12,7 @@ let isWarningStepVisible = false;
 
 this.initializeLanguage();
 if (window.addEventListener) {
-  window.addEventListener("storage", this.storageListener.bind(this), false);
+  window.addEventListener("message", this.listener.bind(this), false);
 }
 
 initializeForm();
@@ -25,16 +26,17 @@ function getBaseHref() {
   return base ? base.getAttribute("href") : "/";
 }
 
-function storageListener() {
-  const lang = localStorage.getItem("lang");
+function listener(event) {
+  if (event.origin === EXTERNAL_URI) {
+    if (event.data && typeof event.data === "string") {
+      currentLang = event.data;
 
-  if (!lang || typeof lang !== "string") this.initializeLanguage();
-  else currentLang = lang;
-
-  resetForm();
-  initializeForm().then(() => {
-    translatePage();
-  });
+      resetForm();
+      initializeForm().then(() => {
+        translatePage();
+      });
+    }
+  }
 }
 
 function initializeForm() {
@@ -189,7 +191,7 @@ function showPdf(step) {
       span.setAttribute("data-i18n-key", "menu.noPDFs");
       const div = document.getElementById("legal_information");
       if (div) {
-        const text = translations.menu.noPDFs;
+        const text = translations ? translations.menu.noPDFs : "";
         span.innerText = text;
         div.append(span);
       }
@@ -227,7 +229,7 @@ function showSynonyms(step) {
       span.setAttribute("data-i18n-key", "menu.noSynonyms");
       const div = document.getElementById("synonyms_info");
       if (div) {
-        const text = translations.menu.noSynonyms;
+        const text = translations ? translations.menu.noSynonyms : "";
         span.innerText = text;
         div.append(span);
       }
@@ -287,7 +289,7 @@ function showText(type, hideToast) {
       "[scanii_simplificationBox]"
     );
 
-    const word = translations.menu.simplifiedText;
+    const word = translations ? translations.menu.simplifiedText : "";
     for (i = 0; i < divLegal.length; i++) {
       simplificationBoxs[i].style =
         "margin-top: 20px; background-color: #F7FAA0 ; padding: 10px; border: 0px; ";
@@ -307,7 +309,7 @@ function showText(type, hideToast) {
       "[scanii_simplificationBox]"
     );
 
-    const word = translations.menu.originalText;
+    const word = translations ? translations.menu.originalText : "";
     for (i = 0; i < divLegal.length; i++) {
       simplificationBoxs[i].style =
         "margin-top: 20px; background-color: #cce6ff ; padding: 10px; border: 0px ";
@@ -325,7 +327,7 @@ function setCompleteVersionButton(btn) {
   // add button icon
   const icon =
     '<svg width="17" height="17" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: text-top;"><path d="M3.54545 11.7188C4.15909 11.7188 4.75284 11.8164 5.3267 12.0117C5.90057 12.207 6.46591 12.5 7.02273 12.8906V2.88281C6.51136 2.41406 5.95739 2.05078 5.3608 1.79297C4.7642 1.53516 4.15909 1.40625 3.54545 1.40625C3.11364 1.40625 2.69034 1.48047 2.27557 1.62891C1.8608 1.77734 1.44318 1.96094 1.02273 2.17969V12.3516C1.375 12.1328 1.77557 11.9727 2.22443 11.8711C2.6733 11.7695 3.11364 11.7188 3.54545 11.7188ZM8.04545 12.8906C8.61364 12.5 9.17045 12.207 9.71591 12.0117C10.2614 11.8164 10.8409 11.7188 11.4545 11.7188C11.8864 11.7188 12.3324 11.7656 12.7926 11.8594C13.2528 11.9531 13.6477 12.0781 13.9773 12.2344V2.17969C13.5909 1.91406 13.1818 1.71875 12.75 1.59375C12.3182 1.46875 11.8864 1.40625 11.4545 1.40625C10.8409 1.40625 10.2472 1.53516 9.6733 1.79297C9.09943 2.05078 8.55682 2.41406 8.04545 2.88281V12.8906ZM7.53409 15C6.95455 14.4062 6.32386 13.9492 5.64205 13.6289C4.96023 13.3086 4.26136 13.1484 3.54545 13.1484C3.125 13.1484 2.71591 13.2188 2.31818 13.3594C1.92045 13.5 1.52273 13.6719 1.125 13.875C0.863636 14.0469 0.610795 14.0234 0.366477 13.8047C0.122159 13.5859 0 13.2734 0 12.8672V2.01562C0 1.78125 0.0397727 1.56641 0.119318 1.37109C0.198864 1.17578 0.318182 1.02344 0.477273 0.914062C0.954545 0.601562 1.4517 0.371094 1.96875 0.222656C2.4858 0.0742189 3.01136 0 3.54545 0C4.26136 0 4.95739 0.132813 5.63352 0.398438C6.30966 0.664063 6.94318 1.07031 7.53409 1.61719C8.11364 1.07031 8.7358 0.664063 9.40057 0.398438C10.0653 0.132813 10.75 0 11.4545 0C11.9886 0 12.5114 0.0742189 13.0227 0.222656C13.5341 0.371094 14.0284 0.601562 14.5057 0.914062C14.6648 1.02344 14.7869 1.17578 14.8722 1.37109C14.9574 1.56641 15 1.78125 15 2.01562V12.8672C15 13.3047 14.8722 13.6367 14.6165 13.8633C14.3608 14.0898 14.108 14.0937 13.858 13.875C13.4716 13.6562 13.0795 13.4805 12.6818 13.3477C12.2841 13.2148 11.875 13.1484 11.4545 13.1484C10.7386 13.1484 10.0511 13.3125 9.39205 13.6406C8.73295 13.9687 8.11364 14.4219 7.53409 15Z" fill="white"/></svg>';
-  const text = translations.menu.completeVersion;
+  const text = translations ? translations.menu.completeVersion : "";
   btn.innerHTML =
     icon +
     '<i style="cursor: default;">&nbsp;</i><span style="cursor: pointer;" data-i18n-key="menu.completeVersion">' +
@@ -337,7 +339,7 @@ function setSimplifiedVersioButton(btn) {
   // add button icon
   const icon =
     '<svg width="17" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: text-bottom"><path d="M7.5 15C6.95455 14.5128 6.36364 14.1346 5.72727 13.8654C5.09091 13.5962 4.43182 13.4615 3.75 13.4615C3.27273 13.4615 2.80398 13.5321 2.34375 13.6731C1.88352 13.8141 1.44318 14.0128 1.02273 14.2692C0.784091 14.4103 0.553977 14.4038 0.332386 14.25C0.110795 14.0962 0 13.8718 0 13.5769V4.30769C0 4.16667 0.03125 4.03205 0.09375 3.90385C0.15625 3.77564 0.25 3.67949 0.375 3.61538C0.897727 3.30769 1.44318 3.07692 2.01136 2.92308C2.57955 2.76923 3.15909 2.69231 3.75 2.69231C4.40909 2.69231 5.05398 2.78846 5.68466 2.98077C6.31534 3.17308 6.92045 3.46154 7.5 3.84615V13.5769C8.07955 13.1538 8.6875 12.8365 9.32386 12.625C9.96023 12.4135 10.6023 12.3077 11.25 12.3077C11.6591 12.3077 12.1051 12.3526 12.5881 12.4423C13.071 12.5321 13.5341 12.7179 13.9773 13V3.28846C14.0909 3.33974 14.2017 3.39103 14.3097 3.44231C14.4176 3.49359 14.5227 3.55128 14.625 3.61538C14.7386 3.69231 14.8295 3.79167 14.8977 3.91346C14.9659 4.03526 15 4.16667 15 4.30769V13.5769C15 13.8718 14.8892 14.0962 14.6676 14.25C14.446 14.4038 14.2159 14.4103 13.9773 14.2692C13.5568 14.0128 13.1165 13.8141 12.6562 13.6731C12.196 13.5321 11.7273 13.4615 11.25 13.4615C10.5682 13.4615 9.90909 13.5962 9.27273 13.8654C8.63636 14.1346 8.04545 14.5128 7.5 15ZM8.52273 11.7885V5L12.9545 0V7.44231L8.52273 11.7885ZM6.47727 13V4.55769C6.09091 4.3141 5.64205 4.13462 5.13068 4.01923C4.61932 3.90385 4.15909 3.84615 3.75 3.84615C3.21591 3.84615 2.71875 3.91026 2.25852 4.03846C1.7983 4.16667 1.38636 4.33333 1.02273 4.53846V13C1.42045 12.7821 1.84943 12.6122 2.30966 12.4904C2.76989 12.3686 3.25568 12.3077 3.76705 12.3077C4.26705 12.3077 4.74432 12.3686 5.19886 12.4904C5.65341 12.6122 6.07955 12.7821 6.47727 13Z" fill="white"/></svg>';
-  const text = translations.menu.simplifiedVersion;
+  const text = translations ? translations.menu.simplifiedVersion : "";
   btn.innerHTML =
     icon +
     '<i style="cursor: default;">&nbsp;</i><span style="cursor: pointer;" data-i18n-key="menu.simplifiedVersion">' +
@@ -498,11 +500,9 @@ function processInfoElementDescription(concept, infoElement, blockId) {
         }
 
         text =
-          text +
-          " <span data-i18n-key='menu.synonyms'>" +
-          translations.menu.synonyms +
-          "</span>: " +
-          synms;
+          text + " <span data-i18n-key='menu.synonyms'>" + translations
+            ? translations.menu.synonyms
+            : "" + "</span>: " + synms;
 
         const id = convertToCamelCase(word.text);
         let li = document.getElementById(id);
@@ -640,7 +640,7 @@ function processInfoElementDescription(concept, infoElement, blockId) {
     "data-bs-custom-class",
     "tooltip simplification-box box-tooltip"
   );
-  const word = translations.menu.originalText;
+  const word = translations ? translations.menu.originalText : "";
   simplificationBox.setAttribute(
     "data-bs-original-title",
     "<span data-i18n-key='menu.originalText'>" + word + "</span>"
@@ -683,9 +683,9 @@ function processInfoElementDescription(concept, infoElement, blockId) {
     "background-color: #F9E79F; color: black; font-size:15px;";
 
   accordionBtn.innerHTML =
-    "<span data-i18n-key='menu.details'>" +
-    translations.menu.details +
-    "</span>";
+    "<span data-i18n-key='menu.details'>" + translations
+      ? translations.menu.details
+      : "" + "</span>";
   accordionBtn.setAttribute("onClick", "closeAccordion(event)");
   accordionItm.append(accordionBtn);
   accordionItm.append(accordionCnt);
@@ -880,11 +880,9 @@ function processInfoElementInformation(
         }
 
         text =
-          text +
-          " <span data-i18n-key='menu.synonyms'>" +
-          translations.menu.synonyms +
-          "</span>: " +
-          synms;
+          text + " <span data-i18n-key='menu.synonyms'>" + translations
+            ? translations.menu.synonyms
+            : "" + "</span>: " + synms;
 
         const id = convertToCamelCase(word.text);
         let li = document.getElementById(id);
@@ -1022,7 +1020,7 @@ function processInfoElementInformation(
     "data-bs-custom-class",
     "tooltip simplification-box box-tooltip"
   );
-  const word = translations.menu.originalText;
+  const word = translations ? translations.menu.originalText : "";
   simplificationBox.setAttribute(
     "data-bs-original-title",
     "<span data-i18n-key='menu.originalText'>" + word + "</span>"
@@ -1065,9 +1063,9 @@ function processInfoElementInformation(
     "background-color: #F9E79F; color: black; font-size:15px;";
 
   accordionBtn.innerHTML =
-    "<span data-i18n-key='menu.details'>" +
-    translations.menu.details +
-    "</span>";
+    "<span data-i18n-key='menu.details'>" + translations
+      ? translations.menu.details
+      : "" + "</span>";
   accordionBtn.setAttribute("onClick", "closeAccordion(event)");
   accordionItm.append(accordionBtn);
   accordionItm.append(accordionCnt);
